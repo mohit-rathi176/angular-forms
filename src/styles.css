@@ -1,3 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "tailwindcss";
+
+p-datepicker > span.p-datepicker.p-inputwrapper {
+	width: 100%;
+}
+
+p-password > div.p-password.p-inputwrapper {
+	width: 100%;
+}
+
+p-password > div.p-password.p-inputwrapper > input.p-password-input {
+	width: 100%;
+}
