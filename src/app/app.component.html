@@ -1,0 +1,15 @@
+<p-menubar [model]="menuItems">
+	<ng-template #start>
+		<div class="flex gap-2 items-center">
+			<img class="block" src="assets/images/angular-logo.png" alt="logo" height="32" width="32" />
+			<h1>Angular Forms</h1>
+		</div>
+	</ng-template>
+	<ng-template #item let-item>
+		<a class="p-menubar-item-link" [routerLink]="item.route" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">{{ item.label }}</a>
+	</ng-template>
+</p-menubar>
+
+<section class="p-4">
+	<router-outlet />
+</section>

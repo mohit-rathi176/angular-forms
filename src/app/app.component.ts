@@ -1,13 +1,25 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ButtonModule } from 'primeng/button';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import { MenubarModule } from 'primeng/menubar';
 
 @Component({
   selector: 'app-root',
-  imports: [ButtonModule, RouterOutlet],
+  imports: [MenubarModule, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+	// private readonly router = inject(Router);
 
+	menuItems: MenuItem[] = [
+		{
+			label: 'Template Driven Form',
+			route: 'template-driven-form'
+		},
+		{
+			label: 'Reactive Form',
+			route: 'reactive-form'
+		}
+	];
 }
