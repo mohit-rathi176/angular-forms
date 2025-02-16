@@ -10,10 +10,10 @@ export const routes: Routes = [
 	},
 	{
 		path: 'template-driven-form',
-		component: TemplateDrivenFormComponent
+		loadComponent: () => import('./components/template-driven-form/template-driven-form.component').then(c => c.TemplateDrivenFormComponent)
 	},
 	{
 		path: 'reactive-form',
-		component: ReactiveFormComponent
+		loadComponent: () => import('./components/reactive-form/reactive-form.component').then(c => c.ReactiveFormComponent)
 	}
 ];
