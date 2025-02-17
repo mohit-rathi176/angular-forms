@@ -108,6 +108,7 @@
 						[(ngModel)]="user.email"
 						required
 						[pattern]="emailRegex"
+						appEmailValidator
 					/>
 					@if (email.invalid && (email.touched || email.dirty)) {
 						<div>
@@ -116,6 +117,9 @@
 							}
 							@if (email.errors?.['pattern']) {
 								<span class="text-xs text-red-500">Email is invalid.</span>
+							}
+							@if (email.errors?.['email']) {
+								<span class="text-xs text-red-500">This email has already been taken.</span>
 							}
 						</div>
 					}

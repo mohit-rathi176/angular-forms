@@ -2,6 +2,10 @@
 
 @import "tailwindcss";
 
+input.p-inputtext.ng-pending, input.p-inputtext.ng-pending:focus {
+	border: 2px solid yellow;
+}
+
 p-datepicker > span.p-datepicker.p-inputwrapper {
 	width: 100%;
 }

@@ -9,6 +9,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { SelectModule } from 'primeng/select';
 import { IUser } from '../../models/IUser.model';
 import { PasswordValidatorDirective } from '../../directives/password-validator.directive';
+import { EmailValidatorDirective } from '../../directives/email-validator.directive';
 
 @Component({
   selector: 'app-template-driven-form',
@@ -21,7 +22,8 @@ import { PasswordValidatorDirective } from '../../directives/password-validator.
 		SelectButtonModule,
 		DatePickerModule,
 		SelectModule,
-		PasswordValidatorDirective
+		PasswordValidatorDirective,
+		EmailValidatorDirective
 	],
   templateUrl: './template-driven-form.component.html',
   styleUrl: './template-driven-form.component.css'
