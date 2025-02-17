@@ -245,7 +245,7 @@
 		</div>
 		<div class="mb-4 flex justify-end gap-4">
 			<p-button type="button" label="Reset" severity="danger" (onClick)="resetForm(userForm)" />
-			<p-button type="submit" label="Submit" [disabled]="userForm.invalid" />
+			<p-button type="submit" label="Submit" [disabled]="userForm.invalid || userForm.pending" />
 		</div>
 	</form>
 </div>

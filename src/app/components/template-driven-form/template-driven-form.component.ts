@@ -71,8 +71,6 @@ export class TemplateDrivenFormComponent {
 	cityOptions: { label: string; value: string }[] = [];
 	maxDate = new Date();
 	emailRegex: RegExp = /^\w+([\.\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w{2,})+$/;
-	passwordRegex: RegExp =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/;
 
 	calculateAge(): void {
 		let dob = this.user.dateOfBirth;

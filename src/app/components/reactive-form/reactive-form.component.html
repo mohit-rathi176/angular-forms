@@ -1,1 +1,222 @@
-<p>reactive-form works!</p>
+<div class="px-72">
+    <form [formGroup]="userForm">
+        <div class="mb-4 flex flex-col gap-4">
+			<div class="grid grid-cols-2 gap-4">
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="firstName">First Name</label>
+					<input
+						pInputText
+						type="text"
+						id="firstName"
+						placeholder="Enter your first name"
+                        formControlName="firstName"
+					/>
+                    @let firstName = userForm.get('firstName');
+                    @if (firstName?.invalid && (firstName?.touched || firstName?.dirty)) {
+						<div>
+							@if (firstName?.errors?.['required']) {
+								<span class="text-xs text-red-500">First Name is required.</span>
+							}
+							@if (firstName?.errors?.['minlength']) {
+								<span class="text-xs text-red-500">Minimum {{ firstName?.errors?.['minlength']?.['requiredLength'] }} characters required.</span>
+							}
+						</div>
+					}
+				</div>
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="lastName">Last Name</label>
+					<input
+						pInputText
+						type="text"
+						id="lastName"
+						placeholder="Enter your last name"
+                        formControlName="lastName"
+					/>
+                    @let lastName = userForm.get('lastName');
+                    @if (lastName?.invalid && (lastName?.touched || lastName?.dirty)) {
+						<div>
+							@if (lastName?.errors?.['required']) {
+								<span class="text-xs text-red-500">Last Name is required.</span>
+							}
+							@if (lastName?.errors?.['minlength']) {
+								<span class="text-xs text-red-500">Minimum {{ lastName?.errors?.['minlength']?.['requiredLength'] }} characters required.</span>
+							}
+						</div>
+					}
+				</div>
+			</div>
+			<div class="grid grid-cols-3 gap-4">
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="gender">Gender</label>
+					<p-selectbutton
+						id="gender"
+						[options]="genderOptions"
+						optionLabel="label"
+						optionValue="value"
+						formControlName="gender"
+					/>
+				</div>
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="dateOfBirth">Date of Birth</label>
+					<p-datepicker
+						inputId="dateOfBirth"
+						dateFormat="dd/mm/yy"
+						placeholder="Enter your date of birth"
+                        formControlName="dateOfBirth"
+						[maxDate]="maxDate"
+					/>
+                    @let dateOfBirth = userForm.get('dateOfBirth');
+                    @if (dateOfBirth?.invalid && (dateOfBirth?.touched || dateOfBirth?.dirty)) {
+						<div>
+							@if (dateOfBirth?.errors?.['required']) {
+								<span class="text-xs text-red-500">Date of Birth is required.</span>
+							}
+						</div>
+					}
+				</div>
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="age">Age</label>
+					<p-inputnumber
+						inputId="age"
+						placeholder="Enter DOB to calculate Age"
+						formControlName="age"
+						readonly
+					/>
+				</div>
+			</div>
+			<div class="grid grid-cols-2 gap-4">
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="email">Email</label>
+					<input
+						pInputText
+						type="email"
+						id="email"
+						placeholder="Enter your email address (Ex: test@example.com)"
+                        formControlName="email"
+					/>
+                    @let email = userForm.get('email');
+                    @if (email?.invalid && (email?.touched || email?.dirty)) {
+						<div>
+							@if (email?.errors?.['required']) {
+								<span class="text-xs text-red-500">Email is required.</span>
+							}
+							@if (email?.errors?.['pattern']) {
+								<span class="text-xs text-red-500">Email is invalid.</span>
+							}
+							@if (email?.errors?.['email']) {
+								<span class="text-xs text-red-500">This email has already been taken.</span>
+							}
+						</div>
+					}
+				</div>
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="password">Password</label>
+					<p-password
+						inputId="password"
+						placeholder="Enter your password"
+                        formControlName="password"
+						[toggleMask]="true"
+						[feedback]="false"
+					/>
+                    @let password = userForm.get('password');
+                    @if (password?.invalid && (password?.touched || password?.dirty)) {
+						<div>
+							@if (password?.errors?.['required']) {
+								<span class="text-xs text-red-500">Password is required.</span>
+							}
+							@if (password?.errors?.['password']) {
+								<span class="text-xs text-red-500">{{ password?.errors?.['password']?.['error'] }}</span>
+							}
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+        <h1 class="mb-4 font-bold text-2xl">Address</h1>
+        <div class="mb-4" formGroupName="address">
+			<div class="mb-4 flex flex-col gap-2">
+				<label class="font-semibold" for="street">Street</label>
+				<input
+					pInputText
+					type="text"
+					id="street"
+					placeholder="Enter your address (Ex: A-101, Example Society)"
+                    formControlName="street"
+				/>
+                @let street = userForm.get('address.street');
+                @if (street?.invalid && (street?.touched || street?.dirty)) {
+					<div>
+						@if (street?.errors?.['required']) {
+							<span class="text-xs text-red-500">Street is required.</span>
+						}
+					</div>
+				}
+			</div>
+			<div class="grid grid-cols-3 gap-4">
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="state">State</label>
+					<p-select
+						inputId="state"
+						placeholder="Select a state"
+                        formControlName="state"
+						[options]="stateOptions"
+						optionLabel="label"
+						optionValue="value"
+					/>
+                    @let state = userForm.get('address.state');
+                    @if (state?.invalid && (state?.touched || state?.dirty)) {
+						<div>
+							@if (state?.errors?.['required']) {
+								<span class="text-xs text-red-500">State is required.</span>
+							}
+						</div>
+					}
+				</div>
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="city">City</label>
+					<p-select
+						inputId="city"
+						placeholder="Select a city"
+                        formControlName="city"
+						[options]="cityOptions"
+						optionLabel="label"
+						optionValue="value"
+					/>
+                    @let city = userForm.get('address.city');
+                    @if (city?.invalid && (city?.touched || city?.dirty)) {
+						<div>
+							@if (city?.errors?.['required']) {
+								<span class="text-xs text-red-500">City is required.</span>
+							}
+						</div>
+					}
+				</div>
+				<div class="flex flex-col gap-2">
+					<label class="font-semibold" for="postalCode">Postal Code</label>
+					<input
+						pInputText
+						type="text"
+						id="postalCode"
+						placeholder="Enter your area's postal code (Ex: 110001)"
+                        formControlName="postalCode"
+					/>
+                    @let postalCode = userForm.get('address.postalCode');
+                    @if (postalCode?.invalid && (postalCode?.touched || postalCode?.dirty)) {
+						<div>
+							@if (postalCode?.errors?.['required']) {
+								<span class="text-xs text-red-500">Postal Code is required.</span>
+							}
+							@if (postalCode?.errors?.['minlength'] || postalCode?.errors?.['maxlength']) {
+								<span class="text-xs text-red-500">Postal Code must be exactly {{ postalCode?.errors?.['minlength']?.['requiredLength'] ?? postalCode?.errors?.['maxlength']?.['requiredLength'] }} digits.</span>
+							}
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+		<div class="mb-4 flex justify-end gap-4">
+			<p-button type="button" label="Reset" severity="danger" (onClick)="resetForm()" />
+			<p-button type="submit" label="Submit" [disabled]="userForm.invalid || userForm.pending" (onClick)="submitForm()" />
+		</div>
+    </form>
+</div>
