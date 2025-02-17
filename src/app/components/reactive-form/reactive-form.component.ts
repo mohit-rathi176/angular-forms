@@ -181,6 +181,10 @@ export class ReactiveFormComponent implements OnInit {
     })!);
   }
 
+  get skills() {
+    return this.userForm.get('skills') as FormArray<FormControl<string | null>>;
+  }
+
   prepareForm(): void {
     this.userForm = this.fb.group<IUserForm>({
       firstName: this.fb.control<string | null>(null, [Validators.required, Validators.minLength(3)]),
@@ -229,6 +233,14 @@ export class ReactiveFormComponent implements OnInit {
       map((isTaken) => isTaken ? { email: true } : null),
       delay(2000)
     );
+  }
+
+  addSkill(): void {
+    this.skills.push(this.fb.control(null, Validators.required));
+  }
+
+  deleteSkill(index: number): void {
+    this.skills.removeAt(index);
   }
 
   resetForm(): void {
