@@ -20,6 +20,10 @@ export class AppComponent {
 		{
 			label: 'Reactive Form',
 			route: 'reactive-form'
+		},
+		{
+			label: 'Control Value Accessor',
+			route: 'control-value-accessor'
 		}
 	];
 }

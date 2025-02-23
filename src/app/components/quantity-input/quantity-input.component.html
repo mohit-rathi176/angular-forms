@@ -1,0 +1,5 @@
+<div class="flex gap-2">
+	<p-button styleClass="w-[41.6px]" type="button" label="-" severity="contrast" [disabled]="isDisabled" (onClick)="decrement()" />
+	<div class="flex justify-center items-center h-[41.6px] w-[41.6px]" [ngClass]="isInvalid ? 'border-1 border-red-500 rounded-md' : ''">{{ quantity }}</div>
+	<p-button styleClass="w-[41.6px]" type="button" label="+" severity="contrast" [disabled]="isDisabled" (onClick)="increment()" />
+</div>
