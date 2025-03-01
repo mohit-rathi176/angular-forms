@@ -24,6 +24,10 @@ export class AppComponent {
 		{
 			label: 'Control Value Accessor',
 			route: 'control-value-accessor'
+		},
+		{
+			label: 'Dynamic Form',
+			route: 'dynamic-form'
 		}
 	];
 }

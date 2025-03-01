@@ -1,1 +1,132 @@
-<p>dynamic-form works!</p>
+<div class="px-72">
+	<h1 class="mb-4 text-3xl font-bold">{{ dynamicFormConfig().title }}</h1>
+	<form [formGroup]="dynamicFormGroup">
+		<div class="mb-4 grid grid-cols-4 gap-4">
+			@for (control of dynamicFormConfig().controls; track $index) {
+				@switch (control.formControlType) {
+					@case (formControlType.InputText) {
+						<div class="flex flex-col gap-2">
+							<label [for]="control.id" class="font-medium">{{ control.label }}</label>
+							<input
+								pInputText
+								[id]="control.id"
+								[type]="control.type ?? 'text'"
+								[placeholder]="control.placeholder"
+								[formControlName]="control.formControlName"
+							/>
+						</div>
+					}
+					@case (formControlType.TextArea) {
+						<div class="flex flex-col gap-2">
+							<label [for]="control.id" class="font-medium">{{ control.label }}</label>
+							<textarea
+								pTextarea
+								[id]="control.id"
+								[placeholder]="control.placeholder"
+								[autoResize]="control.isAutoResize"
+								[formControlName]="control.formControlName"
+							></textarea>
+						</div>
+					}
+					@case (formControlType.Checkbox) {
+						<div class="flex flex-col gap-2">
+							<div class="font-medium">{{ control.label }}</div>
+							<div class="flex flex-col gap-2">
+								@for (option of control.options; track option.id) {
+									<div class="flex gap-2">
+										<p-checkbox
+											[inputId]="option.id"
+											[formControlName]="control.formControlName"
+											[value]="option.value"
+										/>
+										<label [for]="option.id">{{ option.label }}</label>
+									</div>
+								}
+							</div>
+						</div>
+					}
+					@case (formControlType.Radio) {
+						<div class="flex flex-col gap-2">
+							<div class="font-medium">{{ control.label }}</div>
+							<div class="flex flex-col gap-2">
+								@for (option of control.options; track option.id) {
+									<div class="flex gap-2">
+										<p-radiobutton
+											[inputId]="option.id"
+											[formControlName]="control.formControlName"
+											[value]="option.value"
+										/>
+										<label [for]="option.id">{{ option.label }}</label>
+									</div>
+								}
+							</div>
+						</div>
+					}
+					@case (formControlType.Select) {
+						<div class="flex flex-col gap-2">
+							<label [for]="control.id" class="font-medium">{{ control.label }}</label>
+							<p-select
+								[inputId]="control.id"
+								[options]="control.options"
+								[optionLabel]="control.optionLabel"
+								[optionValue]="control.optionValue"
+								[placeholder]="control.placeholder"
+								[checkmark]="control.isCheckmark"
+								[editable]="control.isEditable"
+								[filter]="control.isFilter"
+								[filterBy]="control.filterBy"
+								[showClear]="control.isShowClear"
+								[formControlName]="control.formControlName"
+							/>
+						</div>
+					}
+					@case (formControlType.MultiSelect) {
+						<div class="flex flex-col gap-2">
+							<label [for]="control.id" class="font-medium">{{ control.label }}</label>
+							<p-multiselect
+								[inputId]="control.id"
+								[options]="control.options"
+								[optionLabel]="control.optionLabel"
+								[optionValue]="control.optionValue"
+								[placeholder]="control.placeholder"
+								[maxSelectedLabels]="control.maxSelectedLabels"
+								[display]="control.display ?? 'comma'"
+								[filter]="control.isFilter"
+								[filterBy]="control.filterBy"
+								[showClear]="control.isShowClear"
+								[formControlName]="control.formControlName"
+							/>
+						</div>
+					}
+					@case (formControlType.DatePicker) {
+						<div class="flex flex-col gap-2">
+							<label [for]="control.id" class="font-medium">{{ control.label }}</label>
+							<p-datepicker
+								[inputId]="control.id"
+								[placeholder]="control.placeholder"
+								[dateFormat]="control.dateFormat"
+								[minDate]="control.minDate"
+								[maxDate]="control.maxDate"
+								[showButtonBar]="control.isShowButtonBar"
+								[formControlName]="control.formControlName"
+							/>
+						</div>
+					}
+				}
+			}
+		</div>
+	</form>
+	<div class="flex items-center justify-end gap-4">
+		@for (actionButton of dynamicFormConfig().actionButtons; track $index) {
+			<p-button
+				[type]="actionButton.type"
+				[label]="actionButton.label"
+				[icon]="actionButton.icon"
+				[iconPos]="actionButton.iconPos ?? 'left'"
+				[severity]="actionButton.severity"
+				[disabled]="actionButton.actionButtonName === actionButtonName.Save && dynamicFormGroup.invalid"
+				(onClick)="onClickActionButton(actionButton)"
+			/>
+		}
+	</div>
+</div>

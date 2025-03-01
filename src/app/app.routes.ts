@@ -17,5 +17,9 @@ export const routes: Routes = [
 	{
 		path: 'control-value-accessor',
 		loadComponent: () => import('./components/custom-form-control/custom-form-control.component').then(c => c.CustomFormControlComponent)
+	},
+	{
+		path: 'dynamic-form',
+		loadComponent: () => import('./components/dynamic-form-parent/dynamic-form-parent.component').then(c => c.DynamicFormParentComponent)
 	}
 ];
